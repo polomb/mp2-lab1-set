@@ -216,6 +216,7 @@ TEST(TBitField, and_operator_applied_to_bitfields_of_non_equal_size)
   // bf2 = 01011
   bf2.SetBit(1);
   bf2.SetBit(3);
+  bf2.SetBit(4);
 
   // expBf = 00010
   expBf.SetBit(3);
