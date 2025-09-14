@@ -15,7 +15,7 @@ TBitField::TBitField(int len)
 {
     if (len < 0)
     {
-        throw out_of_range("Error: Bit index out of range");
+        throw out_of_range("Error: TBitField::TBitField(int len) -> Bit index out of range");
     }
     BitLen = len;
     if ((len % (sizeof(TELEM) * 8)) == 0)
@@ -51,7 +51,7 @@ int TBitField::GetMemIndex(const int n) const // индекс Мем для би
 {
     if (n < 0 || n >= BitLen)
     {
-        throw out_of_range("Error: Bit index out of range");
+        throw out_of_range("Error: TBitField::GetMemIndex(const int n) const -> Bit index out of range");
     }
     return n / (sizeof(TELEM) * 8);
     //return FAKE_INT;
@@ -61,7 +61,7 @@ TELEM TBitField::GetMemMask(const int n) const // битовая маска дл
 {
     if (n < 0 || n >= BitLen)
     {
-        throw out_of_range("Error: Bit index out of range");
+        throw out_of_range("Error: TBitField::GetMemMask(const int n) const -> Bit index out of range");
     }
     TELEM bitPos = n % (sizeof(TELEM) * 8);
     return  1 << bitPos;
@@ -80,7 +80,7 @@ void TBitField::SetBit(const int n) // установить бит
 {
     if (n < 0 || n >= BitLen)
     {
-        throw out_of_range("Error: Bit index out of range");
+        throw out_of_range("Error: TBitField::SetBit(const int n) -> Bit index out of range");
     }
     pMem[this->GetMemIndex(n)] |= this->GetMemMask(n);
 }
@@ -89,7 +89,7 @@ void TBitField::ClrBit(const int n) // очистить бит
 {
     if (n < 0 || n >= BitLen)
     {
-        throw out_of_range("Error: Bit index out of range");
+        throw out_of_range("Error: TBitField::ClrBit(const int n) -> Bit index out of range");
     }
     pMem[this->GetMemIndex(n)] &= ~this->GetMemMask(n);
 }
@@ -98,7 +98,7 @@ int TBitField::GetBit(const int n) const // получить значение б
 {
     if (n < 0 || n >= BitLen)
     {
-        throw out_of_range("Error: Bit index out of range");
+        throw out_of_range("Error: TBitField::GetBit(const int n) const -> Bit index out of range");
     }
     int REAL_INT = ((pMem[this->GetMemIndex(n)] & this->GetMemMask(n)) != 0);
     return REAL_INT;
@@ -203,10 +203,6 @@ TBitField TBitField::operator~(void) // отрицание
     return DopField;
     //return FAKE_BITFIELD;
 }
-
-//int  BitLen; // длина битового поля - макс. к-во битов
-//TELEM* pMem; // память для представления битового поля
-//int  MemLen; // к-во эл-тов Мем для представления бит.поля
 
 // ввод/вывод
 
