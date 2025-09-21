@@ -149,69 +149,18 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
-    char ch;
-    istr >> ch;
-
-    if (ch != '{')
-    {
-        istr.setstate(ios::failbit);
-        return istr;
-    }
-
-    for (int i = 0; i < s.MaxPower; i++)
-    {
-        s.DelElem(i);
-    }
-
-    while (istr >> ch && ch != '}')
-    {
-        if (isdigit(ch)) {
-            istr.putback(ch);
-            int elem;
-            istr >> elem;
-
-            if (elem >= 0 && elem < s.MaxPower)
-            {
-                s.InsElem(elem);
-            }
-
-            istr >> ch;
-            if (ch == ',')
-            {
-                continue;
-            }
-            else if (ch == '}')
-            {
-                break;
-            }
-            else
-            {
-                istr.putback(ch);
-            }
-        }
+    for (int i = 0; i < s.GetMaxPower(); i++) {
+        int el;
+        istr >> el;
+        s.InsElem(el);
     }
     return istr;
 }
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
-    ostr << "{";
-    bool first = true;
-    for (int i = 0; i < s.MaxPower; i++)
-    {
-        if (s.IsMember(i))
-        {
-            if (!first)
-            {
-                ostr << ", ";
-            }
-            else
-            {
-                first = false;
-            }
-            ostr << i;
-        }
+    for (int i = 0; i < s.GetMaxPower(); i++) {
+        if (s.IsMember(i)) ostr << i << " ";
     }
-    ostr << "}";
     return ostr;
 }
