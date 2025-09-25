@@ -15,7 +15,7 @@ using namespace std;
 //typedef uint8_t TELEM;
 //typedef uint16_t TELEM;
 //typedef uint32_t TELEM;
-//typedef uint64_t TELEM;
+//typedef uint64_t TELEM; //Теперь работает
 typedef unsigned int TELEM;
 
 class TBitField

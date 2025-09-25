@@ -341,3 +341,18 @@ TEST(TBitField, ILI_works_correctly)
     realRes.SetBit(5);
     EXPECT_EQ(bf, realRes);
 }
+
+TEST(TBitField, can_do_AND_correctly) {
+    const int size1 = 70, size2 = 35;
+    TBitField bf1(size1), bf2(size2), bf3(size1);
+    for (int i = 0; i < size1; i += 2)
+        bf1.SetBit(i);
+    for (int i = 1; i < size2; i += 2)
+        bf2.SetBit(i);
+
+    TBitField res1 = bf1 & bf2;
+    TBitField res2 = bf2 & bf1;
+
+    EXPECT_EQ(bf3, res1);
+    EXPECT_EQ(bf3, res2);
+}

@@ -174,7 +174,7 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
     int DopLen = (BitLen > bf.BitLen) ? BitLen : bf.BitLen;
     TBitField DopField(DopLen);
 
-    DopLen = DopField.MemLen;
+    DopLen = (MemLen < bf.MemLen) ? MemLen : bf.MemLen;
     for (int i = 0; i < DopLen; i++)
     {
         DopField.pMem[i] = pMem[i] & bf.pMem[i];
@@ -187,19 +187,17 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 TBitField TBitField::operator~(void) // отрицание
 {
     TBitField DopField(BitLen);
-
-    for (int i = 0; i < MemLen; i++)
+    for (int i = 0; i < BitLen; i++)
     {
-        DopField.pMem[i] = ~pMem[i];
+        if (GetBit(i) == 0)
+        {
+            DopField.SetBit(i);
+        }
+        else
+        {
+            DopField.ClrBit(i);
+        }
     }
-
-    int DopBits = BitLen % (sizeof(TELEM) * 8);
-    if (DopBits > 0)
-    {
-        TELEM maska = (1 << DopBits) - 1;
-        DopField.pMem[MemLen - 1] &= maska;
-    }
-
     return DopField;
     //return FAKE_BITFIELD;
 }
