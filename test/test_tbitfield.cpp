@@ -356,3 +356,13 @@ TEST(TBitField, can_do_AND_correctly) {
     EXPECT_EQ(bf3, res1);
     EXPECT_EQ(bf3, res2);
 }
+TEST(TBitField, JustPrint) {
+    const int size1 = 70;
+    TBitField bf1(size1);
+    for (int i = 0; i < size1; i += 1)
+    {
+        bf1.SetBit(i);
+        cout << bf1 << "\n";
+    }
+    EXPECT_EQ(1, 1);
+}

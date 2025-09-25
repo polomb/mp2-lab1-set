@@ -64,7 +64,7 @@ TELEM TBitField::GetMemMask(const int n) const // битовая маска дл
         throw out_of_range("Error: TBitField::GetMemMask(const int n) const -> Bit index out of range");
     }
     TELEM bitPos = n % (sizeof(TELEM) * 8);
-    return  1 << bitPos;
+    return  TELEM(1) << bitPos; //Не забыть: двигает единицу на bitPos
     //return FAKE_INT;
 }
 
